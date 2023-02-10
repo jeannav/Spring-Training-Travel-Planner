@@ -50,10 +50,9 @@ To deploy this project run
 - Javascript
 - Jquery
 - Tailwind CSS- 
-- Api Mlb- https://appac.github.io/mlb-data-api-docs/
-- Api-https://developer.sportradar.com/docs/read/baseball/MLB_v7#team-profile
-- Api-https://developer.sportradar.com/docs/read/baseball/MLB_v7#venues
-- Api TripAdvisor-https://developer-tripadvisor.com/self-implemented-solutions/)
+- API Mlb- https://sportsdata.io/ 
+- API TripAdvisor-https://developer-tripadvisor.com/self-implemented-solutions/)
+- API Google Maps
 -
 -
 💡 ## Screenshots
