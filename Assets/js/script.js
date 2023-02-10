@@ -1,19 +1,3 @@
-//Global Variables
-var menuToggleIcon = document.getElementById('menu-toggle-icon');
-var navMobile = document.getElementById('nav');
-var headerElement = document.getElementById('header')
-//var menuToggleIcon = document.getElementById('menu-toggle-icon');
-
-//Toggle navigation
-var toggleMenu = () =>{
-    navMobile.classList.toggle('active');
-    headerElement.classList.toggle('active');
-
-}
-
-menuToggleIcon.addEventListener('click', toggleMenu)
-
-
 var headerScrollEvent = () =>{
     if(this.scrollY >= 30){
         headerElement.classList('active-scroll');
