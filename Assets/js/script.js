@@ -1,7 +1,27 @@
 //Define MLB API KEY
 const _mlb_api_key = "5b51793475924af2b6a167f98ebb328d";
 
-// INSERT THE GOOGLE MAPS API KEY IN THE HTML FILE TOO
+var headerScrollEvent = () =>{
+    if(this.scrollY >= 30){
+        headerElement.classList('active-scroll');
+    }else{
+        headerElement.classList.remove('active-scroll');
+    }
+}
+
+window.addEventListener('scroll', headerScrollEvent)
+
+
+// Api Key for MLB
+var apiKey = "5b51793475924af2b6a167f98ebb328d";
+var savedSearches = [];
+//Api Key for Google Maps 
+var apiKey = "AIzaSyD9Cyq8EZqKTXn9QFvcSCiJZL-D-wCC6aE";
+var savedSearches = [];
+//Api Key for Tripadvisor, if needed
+var apiKey = "C8C1A5F7FC414996AF239F76C4832A9E";
+var savedSearches = []; 
+
 
 //Initialize maps and data structures
 var _scheduleData = {};
