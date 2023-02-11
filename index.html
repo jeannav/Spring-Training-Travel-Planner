@@ -1,48 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Spring Training Travel Planner</title>
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <script src="https://cdn.tailwindcss.com"></script> 
-</head>
-
-<body>
-    //Header h1 title 
-    <header>
-        <h1 class="header">Spring Training Travel Planner</h1>
-    </header>
-
-    <main class="content">
-        <section id="teamLocator">
-            <h2>Team Locator</h2>
-            <p>Enter the team name in the textbox below.</p>
-            <textarea class="teamName"> </textarea>
-            <button id="searchBtn">Search</button>
-        </section>
-
-        <section id="hotelFinder">
-            <h2>Find a Hotel</h2>
-            <p>Find a hotel near your favorite team's spring training facility by clicking the search button below.</p>
-            <button id="searchBtn">Search</button>
-        </section>
-    </main>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<p></p>
-<p></p>
-    <footer class="footer">
-        <h3> Created by Seven Samurai </h3>
-        <p> &copy; 2023 UofA Coding Bootcamp </p>
-    </footer>
-
-
-    <script src="./assets/js/script.js"></script>
-</body>
-
+    <html lang="en-US">
+    <head>
+        <meta charset="UTF-8" />
+        <title>JS Sandbox</title>
+        <script src="script.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <link rel="stylesheet" type="text/css" href="./mapStyle.css" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="title">
+                <center><h1>Spring Training Travel Planner!</h1></center>
+            </div>
+            <div class="hotel-search">
+          
+                <div id="map"></div>
+            
+                <div id="listing">
+                  <table id="resultsTable">
+                    <tbody id="results"></tbody>
+                  </table>
+                </div>
+            
+                <div style="display: none">
+                  <div id="info-content">
+                    <table>
+                      <tr id="iw-url-row" class="iw_table_row">
+                        <td id="iw-icon" class="iw_table_icon"></td>
+                        <td id="iw-url"></td>
+                      </tr>
+                      <tr id="iw-address-row" class="iw_table_row">
+                        <td class="iw_attribute_name">Address:</td>
+                        <td id="iw-address"></td>
+                      </tr>
+                      <tr id="iw-phone-row" class="iw_table_row">
+                        <td class="iw_attribute_name">Telephone:</td>
+                        <td id="iw-phone"></td>
+                      </tr>
+                      <tr id="iw-rating-row" class="iw_table_row">
+                        <td class="iw_attribute_name">Rating:</td>
+                        <td id="iw-rating"></td>
+                      </tr>
+                      <tr id="iw-website-row" class="iw_table_row">
+                        <td class="iw_attribute_name">Website:</td>
+                        <td id="iw-website"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+          </div>
+            <div id="sandbox-div"></div>
+        <!-- 
+      The `defer` attribute causes the callback to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises
+      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+      -->
+      <!-- INSERT YOUR GOOGLE MAPS API KEY HERE -->
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9Cyq8EZqKTXn9QFvcSCiJZL-D-wCC6aE&callback=initMap&libraries=places&v=weekly"
+    defer
+  ></script>
+    </body>
 </html>
