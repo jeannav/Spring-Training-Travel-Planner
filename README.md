@@ -8,6 +8,16 @@ Spring Training Travel Planner we are building a website that allows users to se
 Provide a step by step process to users, instructing them to find the game and location they want to attend, and then using that info to book a nearby hotel room.
 A list of games and locations would be created and then fixed tothe page so as the user scrolls below to select hotel booking options they will also have the list of selected games visibly available.
 
+## Overview
+- Demonstrated how Google Places API can be used with SportsData.io API to fetch MLB Spring Training matches and search hotels around the match venue.
+## Implementation
+- While page loads, on the DOMContentLoadedEvent, the module will try and load all MLB data ( Schedule, Teams, Stadiums )
+- Teams & Stadiums data is cached locally to make efficient use of the APIs, so if a user already visited the page they won't require a new data fetch as data will still be cached.
+- Schedule data could potentially change regularly so it is fetched on each refresh.
+- Once MLB data is loaded and rendered, the map gets initialized.
+- Click on the search button under any matches and the map will get updated at the top to show nearby hotels.
+User can also navigate the map using the mouse and hit the "Search Nerby" to look for nearby hotels.
+
 
 💡 ## Color Reference 💡
 
