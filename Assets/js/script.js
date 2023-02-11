@@ -8,9 +8,9 @@ var _scheduleData = {};
 var _stadiumsDataMap = new Map();
 var _teamsDataMap = new Map();
 //Define URLs
-var teamsURL = `https://api.sportsdata.io/v3/mlb/scores/json/AllTeams?key=${_mlb_api_key}`;
-var stadiumsURL = `https://api.sportsdata.io/v3/mlb/scores/json/Stadiums?key=${_mlb_api_key}`;
-var matchScheduleURL = `https://api.sportsdata.io/v3/mlb/scores/json/Games/2023PRE?key=${_mlb_api_key}`;
+var teamsURL = 'https://api.sportsdata.io/v3/mlb/scores/json/AllTeams?key=${_mlb_api_key}';
+var stadiumsURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Stadiums?key=${_mlb_api_key}';
+var matchScheduleURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Games/2023PRE?key=${_mlb_api_key}';
 
 //Define Google Maps-related variables
 let map;
@@ -50,11 +50,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 window.addEventListener('load', () => {
     _scheduleData.forEach((game) => {
         var stadium = _stadiumsDataMap.get(game.StadiumID);
-        var searchBtn = document.getElementById(`searchButton-${game.GameID}`);
+        var searchBtn = document.getElementById('searchButton-${game.GameID}');
         if (searchBtn){
             searchBtn.onclick = function(){
                 var request = {
-                    query: `${stadium.Name}, ${stadium.City}`,
+                    query: '${stadium.Name}, ${stadium.City}',
                     fields: ['geometry'],
                   };
                   //if clicked, search hotels nearby
@@ -174,13 +174,13 @@ function renderMLBData()
 function renderGameCard(game, home, away, stadium, div)
 {
     {
-        div.innerHTML += `<h1> Game ID: ${game.GameID} </h1>`;
-        div.innerHTML += `<h2>${game.HomeTeam} VS ${game.AwayTeam}</h2><br>`;
-        div.innerHTML += `<p>${game.DateTime} <br>`;
-        div.innerHTML += `Stadium: ${stadium.Name} <br>`;
-        div.innerHTML += `( ${stadium.GeoLat} , ${stadium.GeoLong} ) <br>`;
-        div.innerHTML += `Home Team: ${home.Name} - Away Team: ${away.Name} <br>`
-        div.innerHTML += `<button id="searchButton-${game.GameID}">Search hotels nearby</button>  </p> <br><br>`;
+        div.innerHTML += '<h1> Game ID: ${game.GameID} </h1>';
+        div.innerHTML += '<h2>${game.HomeTeam} VS ${game.AwayTeam}</h2><br>';
+        div.innerHTML += '<p>${game.DateTime} <br>';
+        div.innerHTML += 'Stadium: ${stadium.Name} <br>';
+        div.innerHTML += '( ${stadium.GeoLat} , ${stadium.GeoLong} ) <br>';
+        div.innerHTML += 'Home Team: ${home.Name} - Away Team: ${away.Name} <br>';
+        div.innerHTML += '<button id="searchButton-${game.GameID}">Search hotels nearby</button>  </p> <br><br>';
     }
 }
 
