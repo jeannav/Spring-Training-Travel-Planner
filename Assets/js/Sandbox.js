@@ -1,7 +1,7 @@
 //Define API KEYS
 const _mlb_api_key = "5b51793475924af2b6a167f98ebb328d";
 
-var baseballTeam = document.getElementById ("baseballteam").value
+var baseballTeam = document.getElementById("baseballteam").value
 console.log(baseballTeam)
 
 // MAKE SURE TO INSERT YOUR GOOGLE MAPS API KEY IN THE HTML FILE TOO!
@@ -30,7 +30,7 @@ const countries = {
   },
 };
 const options = {
-    method: 'GET',
+  method: 'GET',
 };
 
 // define custom event
@@ -42,16 +42,16 @@ var renderedMatchCards = new CustomEvent("renderedMatchCards");
 
 //Add event listeners
 window.addEventListener("loadedTeamsDataEvent", () => {
-    checkDataAndInit();
+  checkDataAndInit();
 });
 window.addEventListener("loadedStadiumsDataEvent", () => {
-    checkDataAndInit();
+  checkDataAndInit();
 });
 window.addEventListener("loadedScheduleDataEvent", () => {
   checkDataAndInit();
 });
 window.addEventListener('DOMContentLoaded', (event) => {
-    loadLocalStorageData();
+  loadLocalStorageData();
 });
 //when page fully loads, listen for the on-click event on the search button for each game
 window.addEventListener("renderedMatchCards", (event) => {
@@ -59,155 +59,140 @@ window.addEventListener("renderedMatchCards", (event) => {
 });
 
 //main entry point to the webpage, initializes the page.
-function checkDataAndInit()
-{
-    //check all data is available
-    if ( (window.localStorage.getItem("teamsData") != null) && (window.localStorage.getItem("stadiumsData") != null) && !(Object.keys(_scheduleData).length === 0 && _scheduleData.constructor === Object))
-    {
-      initApp();
-    }
+function checkDataAndInit() {
+  //check all data is available
+  if ((window.localStorage.getItem("teamsData") != null) && (window.localStorage.getItem("stadiumsData") != null) && !(Object.keys(_scheduleData).length === 0 && _scheduleData.constructor === Object)) {
+    initApp();
+  }
 }
 
-function initApp()
-{
+function initApp() {
   //render match schedule/data
   renderMLBData();
   //if called twice, don't re-init
-  initApp = function(){};
+  initApp = function () { };
 }
 
 //loads data into the local storage (like cache) for fast access and efficient API calls
-function loadLocalStorageData()
-{
-    if (window.localStorage.getItem("teamsData") == null)
-    {
-        //Only fetch if data does not exist.. ie: a new user.
-        loadTeamsData();
-    }
-    else 
-    {
-        //If data already exists in local storage, don't fetch from API
-        window.dispatchEvent(loadedTeamsDataEvent);
-    }
-    if (window.localStorage.getItem("stadiumsData") == null)
-    {
-        loadStadiumsData();
-    }
-    else
-    {
-        window.dispatchEvent(loadedStadiumsDataEvent);
-    }
-    //Always load match schedules on each refresh
-    loadScheduleData();
+function loadLocalStorageData() {
+  if (window.localStorage.getItem("teamsData") == null) {
+    //Only fetch if data does not exist.. ie: a new user.
+    loadTeamsData();
+  }
+  else {
+    //If data already exists in local storage, don't fetch from API
+    window.dispatchEvent(loadedTeamsDataEvent);
+  }
+  if (window.localStorage.getItem("stadiumsData") == null) {
+    loadStadiumsData();
+  }
+  else {
+    window.dispatchEvent(loadedStadiumsDataEvent);
+  }
+  //Always load match schedules on each refresh
+  loadScheduleData();
 
 }
 
 //teams data includes name, ID, stdaium ID, stats, etc. 
-function loadTeamsData()
-{
-    fetch(teamsURL, options)
-        .then((response) => response.json())
-        .then((data) => {
-            window.localStorage.setItem("teamsData", JSON.stringify(data));
-            //window.dispatchEvent(loadedTeamsDataEvent);
-        });
+function loadTeamsData() {
+  fetch(teamsURL, options)
+    .then((response) => response.json())
+    .then((data) => {
+      window.localStorage.setItem("teamsData", JSON.stringify(data));
+      //window.dispatchEvent(loadedTeamsDataEvent);
+    });
 }
 
 //stadium data includes name, ID, team, location (lat,lng), city, etc.
-function loadStadiumsData()
-{
-    fetch(stadiumsURL, options)
-        .then((response) => response.json())
-        .then((data) => {
-          alert("hi")
-            window.localStorage.setItem("stadiumsData", JSON.stringify(data));
-            //window.dispatchEvent(loadedStadiumsDataEvent);
-        });
+function loadStadiumsData() {
+  fetch(stadiumsURL, options)
+    .then((response) => response.json())
+    .then((data) => {
+      window.localStorage.setItem("stadiumsData", JSON.stringify(data));
+      //window.dispatchEvent(loadedStadiumsDataEvent);
+    });
 }
 loadStadiumsData()
 
 //schedule data includes the matches being played, their timings, date, teams playing, stadium id, etc.
-function loadScheduleData()
-{
-    fetch(matchScheduleURL, options)
-        .then((response) => response.json())
-        .then((data) => {
-            _scheduleData = data;
-            window.dispatchEvent(loadedScheduleDataEvent);
-        });
+function loadScheduleData() {
+  fetch(matchScheduleURL, options)
+    .then((response) => response.json())
+    .then((data) => {
+      _scheduleData = data;
+      window.dispatchEvent(loadedScheduleDataEvent);
+    });
 }
 loadScheduleData()
 
-function initNearbyPlacesSearch()
-{
+function initNearbyPlacesSearch() {
   _scheduleData.forEach((game) => {
     var stadium = _stadiumsDataMap.get(game.StadiumID);
     var searchBtn = document.getElementById(`searchButton-${game.GameID}`);
-    if (searchBtn){
-        searchBtn.onclick = function(){
-            var request = {
-                query: `${stadium.Name}, ${stadium.City}`,
-                fields: ['geometry'],
-              };
-              //if clicked, search hotels nearby
-              places.findPlaceFromQuery(request, function(results, status) {
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    map.panTo(results[0].geometry.location);
-                    map.setZoom(13);
-                    search();
-                }
-              });
+    if (searchBtn) {
+      searchBtn.onclick = function () {
+        var request = {
+          query: `${stadium.Name}, ${stadium.City}`,
+          fields: ['geometry'],
         };
+        //if clicked, search hotels nearby
+        places.findPlaceFromQuery(request, function (results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            map.panTo(results[0].geometry.location);
+            map.setZoom(13);
+            search();
+          }
+        });
+      };
     }
-})
+  })
 }
 
 //parse match data and render to screen
-function renderMLBData()
-{
-    var stadiumsDataJson = JSON.parse(window.localStorage.getItem("stadiumsData"));
-    if (!stadiumsDataJson) {return}
-    console.log(stadiumsDataJson);
-    stadiumsDataJson.forEach((entry) => {
-        _stadiumsDataMap.set(entry.StadiumID, entry);
-    })
-    const teamsDataJson = JSON.parse(window.localStorage.teamsData);
+function renderMLBData() {
+  var stadiumsDataJson = JSON.parse(window.localStorage.getItem("stadiumsData"));
+  if (!stadiumsDataJson) { return }
+  console.log(stadiumsDataJson);
+  stadiumsDataJson.forEach((entry) => {
+    _stadiumsDataMap.set(entry.StadiumID, entry);
+  })
+  const teamsDataJson = JSON.parse(window.localStorage.teamsData);
 
-    teamsDataJson.forEach((entry) => {
-        _teamsDataMap.set(entry.Key, entry);
-    })
+  teamsDataJson.forEach((entry) => {
+    _teamsDataMap.set(entry.Key, entry);
+  })
 
-    var divSandBox = document.getElementById("sandbox-div");
-    var gameCardsHTML = "<div>";
-    _scheduleData.forEach((game) => {
-        //loop through each match, render a card showing match info
-        var home = _teamsDataMap.get(game.HomeTeam);
-        var away = _teamsDataMap.get(game.AwayTeam);
-        var stadium = _stadiumsDataMap.get(game.StadiumID);
-        gameCardsHTML += renderGameCard(game, home, away, stadium);
-    });
-    gameCardsHTML += "/<div>";
-    divSandBox.innerHTML += gameCardsHTML;
-    window.dispatchEvent(renderedMatchCards);
+  var divSandBox = document.getElementById("sandbox-div");
+  var gameCardsHTML = "<div>";
+  _scheduleData.forEach((game) => {
+    //loop through each match, render a card showing match info
+    var home = _teamsDataMap.get(game.HomeTeam);
+    var away = _teamsDataMap.get(game.AwayTeam);
+    var stadium = _stadiumsDataMap.get(game.StadiumID);
+    gameCardsHTML += renderGameCard(game, home, away, stadium);
+  });
+  gameCardsHTML += "/<div>";
+  divSandBox.innerHTML += gameCardsHTML;
+  window.dispatchEvent(renderedMatchCards);
 }
 
 //render card showing match info
-function renderGameCard(game, home, away, stadium)
-{
+function renderGameCard(game, home, away, stadium) {
   var gameCardDiv = "<div>";
-    {
-      gameCardDiv += `<h1> Game ID: ${game.GameID} </h1>`;
-      gameCardDiv += `<h2>${game.HomeTeam} VS ${game.AwayTeam}</h2><br>`;
-      gameCardDiv += `<p>${game.DateTime} <br>`;
-      if(stadium){
-        gameCardDiv += `Stadium: ${stadium.Name} <br>`;
-        gameCardDiv += `( ${stadium.GeoLat} , ${stadium.GeoLong} ) <br>`;
-      }
-      gameCardDiv += `Home Team: ${home.Name} - Away Team: ${away.Name} <br>`
-      gameCardDiv += `<button id="searchButton-${game.GameID}">Search hotels nearby</button></p><br><br>`;
+  
+    gameCardDiv += `<h1> Game ID: ${game.GameID} </h1>`;
+    gameCardDiv += `<h2>${game.HomeTeam} VS ${game.AwayTeam}</h2><br>`;
+    gameCardDiv += `<p>${game.DateTime} <br>`;
+    if (stadium) {
+      gameCardDiv += `Stadium: ${stadium.Name} <br>`;
+      gameCardDiv += `( ${stadium.GeoLat} , ${stadium.GeoLong} ) <br>`;
     }
-    gameCardDiv += "</div>";
-    return gameCardDiv;
+    gameCardDiv += `Home Team: ${home.Name} - Away Team: ${away.Name} <br>`
+    gameCardDiv += `<button id="searchButton-${game.GameID}">Search hotels nearby</button></p><br><br>`;
+  
+  gameCardDiv += "</div>";
+  return gameCardDiv;
 }
 
 //Initialize google maps places API
@@ -234,28 +219,28 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 }
 function createCenterControl(map) {
-    const controlButton = document.createElement("button");
-  
-    // Set CSS for the control.
-    controlButton.style.backgroundColor = "#fff";
-    controlButton.style.border = "2px solid #fff";
-    controlButton.style.borderRadius = "3px";
-    controlButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
-    controlButton.style.color = "rgb(25,25,25)";
-    controlButton.style.cursor = "pointer";
-    controlButton.style.fontFamily = "Roboto,Arial,sans-serif";
-    controlButton.style.fontSize = "16px";
-    controlButton.style.lineHeight = "38px";
-    controlButton.style.margin = "8px 0 22px";
-    controlButton.style.padding = "0 5px";
-    controlButton.style.textAlign = "center";
-    controlButton.textContent = "Search Nearby";
-    controlButton.title = "Search Nearby";
-    controlButton.type = "button";
-    // Setup the click event listeners: simply search nearby hotels.
-    controlButton.addEventListener("click", search);
-    return controlButton;
-  }
+  const controlButton = document.createElement("button");
+
+  // Set CSS for the control.
+  controlButton.style.backgroundColor = "#fff";
+  controlButton.style.border = "2px solid #fff";
+  controlButton.style.borderRadius = "3px";
+  controlButton.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+  controlButton.style.color = "rgb(25,25,25)";
+  controlButton.style.cursor = "pointer";
+  controlButton.style.fontFamily = "Roboto,Arial,sans-serif";
+  controlButton.style.fontSize = "16px";
+  controlButton.style.lineHeight = "38px";
+  controlButton.style.margin = "8px 0 22px";
+  controlButton.style.padding = "0 5px";
+  controlButton.style.textAlign = "center";
+  controlButton.textContent = "Search Nearby";
+  controlButton.title = "Search Nearby";
+  controlButton.type = "button";
+  // Setup the click event listeners: simply search nearby hotels.
+  controlButton.addEventListener("click", search);
+  return controlButton;
+}
 
 // Search for hotels in the selected city, within the viewport of the map.
 function search() {
@@ -418,8 +403,8 @@ function buildIWContent(place) {
 
 window.initMap = initMap;
 
-var searchButton= document.getElementById("searchbutton")
-searchButton.addEventListener("click",function(){
+var searchButton = document.getElementById("searchbutton")
+searchButton.addEventListener("click", function () {
   loadStadiumsData()
   load
 })
