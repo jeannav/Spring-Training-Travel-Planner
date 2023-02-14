@@ -65,10 +65,12 @@ To deploy this project run
 
 
 💡 ## Screenshots
+1. <img width="1384" alt="Screen Shot 2023-02-14 at 2 22 37 PM" src="https://user-images.githubusercontent.com/109550438/218866188-d11485c3-5060-4239-8715-606ca85cb462.png">
 
-1. ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-2. 
-3. 
-4. 
+2. <img width="1384" alt="Screen Shot 2023-02-14 at 2 22 47 PM" src="https://user-images.githubusercontent.com/109550438/218866206-9f7287bf-14d6-4f5d-a7de-13fe78a8f137.png">
+
+3. <img width="1429" alt="Screen Shot 2023-02-14 at 2 23 06 PM" src="https://user-images.githubusercontent.com/109550438/218866339-7a795d8b-53d0-4040-a5b3-0da4e6fd9968.png">
+
+
 
 
