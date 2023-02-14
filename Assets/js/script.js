@@ -38,7 +38,7 @@ var loadedStadiumsDataEvent = new CustomEvent("loadedStadiumsDataEvent");
 var renderedMatchCards = new CustomEvent("renderedMatchCards");
 
 //Add event listeners
-window.addEventListener("loadedTeamsDataEvent", () => {
+window.addEventListener("loadedTeamsDataEvent", function() {
     checkDataAndInit();
 });
 window.addEventListener("loadedStadiumsDataEvent", () => {
@@ -117,7 +117,6 @@ function loadStadiumsData()
     fetch(stadiumsURL, options)
         .then((response) => response.json())
         .then((data) => {
-          alert("Welcome to our App ")
             window.localStorage.setItem("stadiumsData", JSON.stringify(data));
             //window.dispatchEvent(loadedStadiumsDataEvent);
         });
@@ -161,32 +160,32 @@ function initNearbyPlacesSearch()
 }
 
 //parse match data and render to screen
+var divSandBox = document.getElementById("sandbox-div");
+var stadiumsDataJson = JSON.parse(window.localStorage.getItem("stadiumsData"));
 function renderMLBData()
 {
-    var stadiumsDataJson = JSON.parse(window.localStorage.getItem("stadiumsData"));
-    if (!stadiumsDataJson) {return}
-    console.log(stadiumsDataJson);
-    stadiumsDataJson.forEach((entry) => {
-        _stadiumsDataMap.set(entry.StadiumID, entry);
-    })
-    const teamsDataJson = JSON.parse(window.localStorage.teamsData);
-
-    teamsDataJson.forEach((entry) => {
-        _teamsDataMap.set(entry.Key, entry);
-    })
-
-    var divSandBox = document.getElementById("sandbox-div");
-    var gameCardsHTML = "<div>";
-    _scheduleData.forEach((game) => {
-        //loop through each match, render a card showing match info
-        var home = _teamsDataMap.get(game.HomeTeam);
-        var away = _teamsDataMap.get(game.AwayTeam);
-        var stadium = _stadiumsDataMap.get(game.StadiumID);
-        gameCardsHTML += renderGameCard(game, home, away, stadium);
-    });
-    gameCardsHTML += "/<div>";
-    divSandBox.innerHTML += gameCardsHTML;
-    window.dispatchEvent(renderedMatchCards);
+  if (!stadiumsDataJson) {return}
+  console.log(stadiumsDataJson);
+  stadiumsDataJson.forEach((entry) => {
+    _stadiumsDataMap.set(entry.StadiumID, entry);
+  })
+  const teamsDataJson = JSON.parse(window.localStorage.teamsData);
+  
+  teamsDataJson.forEach((entry) => {
+    _teamsDataMap.set(entry.Key, entry);
+  })
+  
+  var gameCardsHTML = "<div>";
+  _scheduleData.forEach((game) => {
+    //loop through each match, render a card showing match info
+    var home = _teamsDataMap.get(game.HomeTeam);
+    var away = _teamsDataMap.get(game.AwayTeam);
+    var stadium = _stadiumsDataMap.get(game.StadiumID);
+    gameCardsHTML += renderGameCard(game, home, away, stadium);
+  });
+  gameCardsHTML += "/<div>";
+  divSandBox.innerHTML += gameCardsHTML;
+  window.dispatchEvent(renderedMatchCards);
 }
 
 //render card showing match info
@@ -421,15 +420,3 @@ window.initMap = initMap;
 //  loadStadiumsData()
 //  load
 //}) 
-
-
-
-
-
-
-
-
-
-
-
-

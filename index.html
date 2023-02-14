@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Spring Training Travel Planner</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" type="text/css" href="./Assets/css/mapStyle.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="./Assets/css/mapStyle.css" /> -->
     <link rel="stylesheet" type="text/css" href="./Assets/css/style.css" />
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"> 
@@ -17,59 +17,63 @@
 </head>
     <body>
         <header class="header" id="header">
-            <nav class="nav container" id="nav">
-                <div class="div-container flex justify-content:center">
-                    <img class="w-12" src="./Assets/images/basball-image.png" alt="baseball">
-                    <a href="/" class="logo ml-5">Spring Training Travel Planner</a>
+            <nav class="nav container ml-10" id="nav">
+                <div class="div-container flex justify-center">
+                  <img class="w-12" src="./Assets/images/AZ_Logo.png" alt="Arizona Spring Training Logo">
+                  <a href="/" class="logo ml-5">Spring Training Travel Planner</a>
+                  <img class="w-12 ml-5" src="./Assets/images/FL_Logo.png" alt="Florida Spring Training Logo">
                 </div>
-               
-                
             </nav>
-        </header>
+        </header>    
+        <div class="info-content p-5 m-5">
+          <p> Welcome! The Spring Training Travel Planner is a quick and convenient way to use your favorite team's spring training location to find game details, and nearby lodging. </p>
+          <br>
+          <p> Use the Google map provided below by navigating the pane to Arizona or Florida. Once you have narrowed in on your team's Spring Training location, a list of all games played will display to the left of the Google Map. See a game you want to attend? Take your search one step further and select “Search hotels nearby” below your desired game. Doing so will list hotels around the stadium of the game you selected. Happy Spring Training Planning! </p>
+        </div>
         <div id="container">
-            
             <div class="hotel-search">
-          
-                <div id="map"></div>
-            
-                <div id="listing">
-                  <table id="resultsTable">
-                    <tbody id="results"></tbody>
-                  </table>
+                <div class="row">
+                    <div class="column" style="overflow-x: hidden; overflow-y: auto; max-height: 80vh;">
+                        <div id="sandbox-div"  class="column1-schedule"></div>
+                        <div style="display: none">
+                            <div id="info-content">
+                                <table>
+                                <tr id="iw-url-row" class="iw_table_row">
+                                    <td id="iw-icon" class="iw_table_icon"></td>
+                                    <td id="iw-url"></td>
+                                </tr>
+                                <tr id="iw-address-row" class="iw_table_row">
+                                    <td class="iw_attribute_name">Address:</td>
+                                    <td id="iw-address"></td>
+                                </tr>
+                                <tr id="iw-phone-row" class="iw_table_row">
+                                    <td class="iw_attribute_name">Telephone:</td>
+                                    <td id="iw-phone"></td>
+                                </tr>
+                                <tr id="iw-rating-row" class="iw_table_row">
+                                    <td class="iw_attribute_name">Rating:</td>
+                                    <td id="iw-rating"></td>
+                                </tr>
+                                <tr id="iw-website-row" class="iw_table_row">
+                                    <td class="iw_attribute_name">Website:</td>
+                                    <td id="iw-website"></td>
+                                </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div id="map" class="column2-map"></div>
+                        <div id="listing">
+                            <table id="resultsTable" style="clear: both;">
+                                <tbody id="results"></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            
-                <div style="display: none">
-                  <div id="info-content">
-                    <table>
-                      <tr id="iw-url-row" class="iw_table_row">
-                        <td id="iw-icon" class="iw_table_icon"></td>
-                        <td id="iw-url"></td>
-                      </tr>
-                      <tr id="iw-address-row" class="iw_table_row">
-                        <td class="iw_attribute_name">Address:</td>
-                        <td id="iw-address"></td>
-                      </tr>
-                      <tr id="iw-phone-row" class="iw_table_row">
-                        <td class="iw_attribute_name">Telephone:</td>
-                        <td id="iw-phone"></td>
-                      </tr>
-                      <tr id="iw-rating-row" class="iw_table_row">
-                        <td class="iw_attribute_name">Rating:</td>
-                        <td id="iw-rating"></td>
-                      </tr>
-                      <tr id="iw-website-row" class="iw_table_row">
-                        <td class="iw_attribute_name">Website:</td>
-                        <td id="iw-website"></td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-          </div>
-          </div>
- 
+            </div>
+        </div>
  </main>
-
- <div id="sandbox-div"></div>
         <!-- 
       The `defer` attribute causes the callback to execute after the full HTML
       document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -83,4 +87,3 @@
     
     </body>
 </html>
-     
