@@ -1,36 +1,16 @@
-//Define MLB API KEY
+//Define API KEYS
 const _mlb_api_key = "5b51793475924af2b6a167f98ebb328d";
 
-var headerScrollEvent = () =>{
-    if(this.scrollY >= 30){
-        headerElement.classList('active-scroll');
-    }else{
-        headerElement.classList.remove('active-scroll');
-    }
-}
-
-window.addEventListener('scroll', headerScrollEvent)
-
-
-// Api Key for MLB
-var apiKey = "5b51793475924af2b6a167f98ebb328d";
-var savedSearches = [];
-//Api Key for Google Maps 
-var apiKey = "AIzaSyD9Cyq8EZqKTXn9QFvcSCiJZL-D-wCC6aE";
-var savedSearches = [];
-//Api Key for Tripadvisor, if needed
-var apiKey = "C8C1A5F7FC414996AF239F76C4832A9E";
-var savedSearches = []; 
-
+// MAKE SURE TO INSERT YOUR GOOGLE MAPS API KEY IN THE HTML FILE TOO!
 
 //Initialize maps and data structures
 var _scheduleData = {};
 var _stadiumsDataMap = new Map();
 var _teamsDataMap = new Map();
 //Define URLs
-var teamsURL = 'https://api.sportsdata.io/v3/mlb/scores/json/AllTeams?key=${_mlb_api_key}';
-var stadiumsURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Stadiums?key=${_mlb_api_key}';
-var matchScheduleURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Games/2023PRE?key=${_mlb_api_key}';
+var teamsURL = `https://api.sportsdata.io/v3/mlb/scores/json/AllTeams?key=${_mlb_api_key}`;
+var stadiumsURL = `https://api.sportsdata.io/v3/mlb/scores/json/Stadiums?key=${_mlb_api_key}`;
+var matchScheduleURL = `https://api.sportsdata.io/v3/mlb/scores/json/Games/2023PRE?key=${_mlb_api_key}`;
 
 //Define Google Maps-related variables
 let map;
@@ -55,6 +35,7 @@ var loadedScheduleDataEvent = new CustomEvent("loadedScheduleDataEvent");
 var loadedLocalStorageDataEvent = new CustomEvent("loadedLocalStorageDataEvent");
 var loadedTeamsDataEvent = new CustomEvent("loadedTeamsDataEvent");
 var loadedStadiumsDataEvent = new CustomEvent("loadedStadiumsDataEvent");
+var renderedMatchCards = new CustomEvent("renderedMatchCards");
 
 //Add event listeners
 window.addEventListener("loadedTeamsDataEvent", () => {
@@ -63,49 +44,33 @@ window.addEventListener("loadedTeamsDataEvent", () => {
 window.addEventListener("loadedStadiumsDataEvent", () => {
     checkDataAndInit();
 });
+window.addEventListener("loadedScheduleDataEvent", () => {
+  checkDataAndInit();
+});
 window.addEventListener('DOMContentLoaded', (event) => {
     loadLocalStorageData();
 });
 //when page fully loads, listen for the on-click event on the search button for each game
-window.addEventListener('load', () => {
-    _scheduleData.forEach((game) => {
-        var stadium = _stadiumsDataMap.get(game.StadiumID);
-        var searchBtn = document.getElementById('searchButton-${game.GameID}');
-        if (searchBtn){
-            searchBtn.onclick = function(){
-                var request = {
-                    query: '${stadium.Name}, ${stadium.City}',
-                    fields: ['geometry'],
-                  };
-                  //if clicked, search hotels nearby
-                  places.findPlaceFromQuery(request, function(results, status) {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        map.panTo(results[0].geometry.location);
-                        map.setZoom(13);
-                        search();
-                    }
-                  });
-            };
-        }
-    })
-})
+window.addEventListener("renderedMatchCards", (event) => {
+  initNearbyPlacesSearch();
+});
 
 //main entry point to the webpage, initializes the page.
 function checkDataAndInit()
 {
-    if ( (window.localStorage.getItem("teamsData") != null) && (window.localStorage.getItem("stadiumsData") != null) )
+    //check all data is available
+    if ( (window.localStorage.getItem("teamsData") != null) && (window.localStorage.getItem("stadiumsData") != null) && !(Object.keys(_scheduleData).length === 0 && _scheduleData.constructor === Object))
     {
-        initApp();
+      initApp();
     }
 }
 
 function initApp()
 {
-    window.addEventListener("loadedScheduleDataEvent", () => {
-        renderMLBData()
-    })
-    //if called twice, don't re-init
-    initApp = function(){};
+  //render match schedule/data
+  renderMLBData();
+  //if called twice, don't re-init
+  initApp = function(){};
 }
 
 //loads data into the local storage (like cache) for fast access and efficient API calls
@@ -125,7 +90,7 @@ function loadLocalStorageData()
     {
         loadStadiumsData();
     }
-    else 
+    else
     {
         window.dispatchEvent(loadedStadiumsDataEvent);
     }
@@ -141,9 +106,10 @@ function loadTeamsData()
         .then((response) => response.json())
         .then((data) => {
             window.localStorage.setItem("teamsData", JSON.stringify(data));
-            window.dispatchEvent(loadedTeamsDataEvent);
+            //window.dispatchEvent(loadedTeamsDataEvent);
         });
 }
+loadTeamsData()
 
 //stadium data includes name, ID, team, location (lat,lng), city, etc.
 function loadStadiumsData()
@@ -151,10 +117,12 @@ function loadStadiumsData()
     fetch(stadiumsURL, options)
         .then((response) => response.json())
         .then((data) => {
+          alert("Welcome to our App ")
             window.localStorage.setItem("stadiumsData", JSON.stringify(data));
-            window.dispatchEvent(loadedStadiumsDataEvent);
+            //window.dispatchEvent(loadedStadiumsDataEvent);
         });
 }
+loadStadiumsData()
 
 //schedule data includes the matches being played, their timings, date, teams playing, stadium id, etc.
 function loadScheduleData()
@@ -166,11 +134,38 @@ function loadScheduleData()
             window.dispatchEvent(loadedScheduleDataEvent);
         });
 }
+loadScheduleData()
+
+function initNearbyPlacesSearch()
+{
+  _scheduleData.forEach((game) => {
+    var stadium = _stadiumsDataMap.get(game.StadiumID);
+    var searchBtn = document.getElementById(`searchButton-${game.GameID}`);
+    if (searchBtn){
+        searchBtn.onclick = function(){
+            var request = {
+                query: `${stadium.Name}, ${stadium.City}`,
+                fields: ['geometry'],
+              };
+              //if clicked, search hotels nearby
+              places.findPlaceFromQuery(request, function(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    map.panTo(results[0].geometry.location);
+                    map.setZoom(13);
+                    search();
+                }
+              });
+        };
+    }
+})
+}
 
 //parse match data and render to screen
 function renderMLBData()
 {
-    var stadiumsDataJson = JSON.parse(window.localStorage.stadiumsData);
+    var stadiumsDataJson = JSON.parse(window.localStorage.getItem("stadiumsData"));
+    if (!stadiumsDataJson) {return}
+    console.log(stadiumsDataJson);
     stadiumsDataJson.forEach((entry) => {
         _stadiumsDataMap.set(entry.StadiumID, entry);
     })
@@ -179,29 +174,38 @@ function renderMLBData()
     teamsDataJson.forEach((entry) => {
         _teamsDataMap.set(entry.Key, entry);
     })
-    
+
     var divSandBox = document.getElementById("sandbox-div");
+    var gameCardsHTML = "<div>";
     _scheduleData.forEach((game) => {
         //loop through each match, render a card showing match info
         var home = _teamsDataMap.get(game.HomeTeam);
         var away = _teamsDataMap.get(game.AwayTeam);
         var stadium = _stadiumsDataMap.get(game.StadiumID);
-        renderGameCard(game, home, away, stadium, divSandBox);
-    })          
+        gameCardsHTML += renderGameCard(game, home, away, stadium);
+    });
+    gameCardsHTML += "/<div>";
+    divSandBox.innerHTML += gameCardsHTML;
+    window.dispatchEvent(renderedMatchCards);
 }
 
 //render card showing match info
-function renderGameCard(game, home, away, stadium, div)
+function renderGameCard(game, home, away, stadium)
 {
+  var gameCardDiv = "<div>";
     {
-        div.innerHTML += '<h1> Game ID: ${game.GameID} </h1>';
-        div.innerHTML += '<h2>${game.HomeTeam} VS ${game.AwayTeam}</h2><br>';
-        div.innerHTML += '<p>${game.DateTime} <br>';
-        div.innerHTML += 'Stadium: ${stadium.Name} <br>';
-        div.innerHTML += '( ${stadium.GeoLat} , ${stadium.GeoLong} ) <br>';
-        div.innerHTML += 'Home Team: ${home.Name} - Away Team: ${away.Name} <br>';
-        div.innerHTML += '<button id="searchButton-${game.GameID}">Search hotels nearby</button>  </p> <br><br>';
+      gameCardDiv += `<h1> Game ID: ${game.GameID} </h1>`;
+      gameCardDiv += `<h2>${game.HomeTeam} VS ${game.AwayTeam}</h2><br>`;
+      gameCardDiv += `<p>${game.DateTime} <br>`;
+      if(stadium){
+        gameCardDiv += `Stadium: ${stadium.Name} <br>`;
+        gameCardDiv += `( ${stadium.GeoLat} , ${stadium.GeoLong} ) <br>`;
+      }
+      gameCardDiv += `Home Team: ${home.Name} - Away Team: ${away.Name} <br>`
+      gameCardDiv += `<button id="searchButton-${game.GameID}">Search hotels nearby</button></p><br><br>`;
     }
+    gameCardDiv += "</div>";
+    return gameCardDiv;
 }
 
 //Initialize google maps places API
@@ -411,3 +415,21 @@ function buildIWContent(place) {
 }
 
 window.initMap = initMap;
+
+//var searchButton= document.getElementById("searchbutton")
+//searchButton.addEventListener("click",function(){
+//  loadStadiumsData()
+//  load
+//}) 
+
+
+
+
+
+
+
+
+
+
+
+
