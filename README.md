@@ -34,8 +34,8 @@ User can also navigate the map using the mouse and hit the "Search Nerby" to loo
 To deploy this project run
 
 ```bash
-  link- 
-  Github link- 
+  link- https://github.com/jeannav/Spring-Training-Travel-Planner/tree/main
+  Github link- https://jeannav.github.io/Spring-Training-Travel-Planner/
 ```
 
 
@@ -61,10 +61,9 @@ To deploy this project run
 - Jquery
 - Tailwind CSS- 
 - API Mlb- https://sportsdata.io/ 
-- API TripAdvisor-https://developer-tripadvisor.com/self-implemented-solutions/)
 - API Google Maps
--
--
+
+
 💡 ## Screenshots
 
 1. ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
