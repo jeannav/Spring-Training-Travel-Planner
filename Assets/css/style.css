@@ -1,15 +1,15 @@
 /* Import font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* Custom properties */
 :root{
     --light-clr: #f8f8f8;
-    --dark-clr: #504f4f;
-    --accent-clr: #00cc90;
+    --primary-clr: #504f4f;
+    --dark-clr: #000089;
+    --accent-clr: #cd0001;
 
-    --font-size-xsm: 1.2rem;
-    --font-size-sm: 1.6rem;
-    --font-size-md: 2.4rem;
-    --font-size-lg: 3.6rem;
     --font-family: 'Poppins', sans-serif;
     --font-weight-light: 300;
     --font-weight-normal: 400;
@@ -35,13 +35,13 @@
 }
 
 html{
-    font-size: 62.5%;
+    font-size:75%;
 }
 
 body{
     font-family: var(--font-family);
-    font-size: var(--font-size-sm);
-    color: var(--dark-clr);
+    font-size: 2vw;
+    color: var(--primary-clr);
     overflow-x: hidden;
 }
 a{
@@ -58,9 +58,9 @@ img{
     display: block;
 }
 
-i{
+/* i{
     font-size: var(--margin-md);
-}
+} */
 /* Reusable */
 .container{
     max-width: 116rem;
@@ -92,23 +92,33 @@ i{
     left: 0;
     width: 100%;
     z-index: 999;
+    border-bottom: thick double var(--accent-clr);
     
+}
+
+.logo{
+    font-size: var(--margin-md);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-clr);
+    font-size: 3vw;
 }
 
 .topnav{
     height: 8rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     background-color: inherit;
 }
 
-.logo{
-    font-size: var(--margin-md);
-    font-weight: var(--font-weight-bold);
-    color: var(--dark-clr);
+.topnav a:hover {
+    background-size: 100% 100%;
+    color: var(--accent-clr);
+    background-color: var(--light-clr);
+    box-shadow: 5px 5px 6px -3px var(--primary-clr);
+    /* background-size: 100% 88%; */
+    border-color: var(--dark-clr);
 }
-
 
 .list{
     display: flex;
@@ -218,9 +228,10 @@ min-height: 25rem;
     transition: transform .5s;
 }
 
-.image-box:hover img{
+.image-box img:hover {
     transform: (1.1);
 }
+
 /* Popular-destinations */
 
 /* Newsletter */
