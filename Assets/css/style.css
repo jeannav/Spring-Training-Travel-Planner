@@ -167,5 +167,11 @@ font-weight: 700;}
   .column2-map {
     background-color: green;
   }
+
+img.w-12 {
+width: 10%;
+max-width: 70px;
+height: 10%;
+}
   
   #sandbox-div h2 {font-weight: 700!important; font-size: larger!important;}
