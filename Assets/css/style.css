@@ -205,7 +205,7 @@ height: 10%;
 	/*Big smartphones [426px -> 600px]*/
     .info-content.p-5.m-5 {
         width: 100%;
-        margin: 20px auto;
+        margin: 20px;
         padding: 2em;
         background-color: #eeeeee;
         border-radius: 20px;
@@ -216,13 +216,13 @@ height: 10%;
         font-size: 1em;
     }
 	a.logo.ml-5 {
-    font-size: .4em;}
+    font-size: 1.2em;}
 }
 @media only screen and (max-width: 425px){
 	/*Small smartphones [325px -> 425px]*/
     .info-content.p-5.m-5 {
         width: 100%;
-        margin: 20px auto;
+        margin: 20px;
         padding: 2em;
         background-color: #eeeeee;
         border-radius: 20px;
@@ -233,6 +233,6 @@ height: 10%;
     }
     
 	a.logo.ml-5 {
-    font-size: .3em;
+    font-size: 1em;
 }
 }
