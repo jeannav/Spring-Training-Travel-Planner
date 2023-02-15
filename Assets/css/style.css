@@ -210,11 +210,11 @@ height: 10%;
         background-color: #eeeeee;
         border-radius: 20px;
         box-shadow: 0px 4px 11px rgb(0 0 0 / 30%);
-        
     }
     .info-content.p-5.m-5 p {
-        font-size: 2em;
+        font-size: 1em;
     }
+	.column {width:100%;}
 }
 @media only screen and (max-width: 425px){
 	/*Small smartphones [325px -> 425px]*/
@@ -225,10 +225,9 @@ height: 10%;
         background-color: #eeeeee;
         border-radius: 20px;
         box-shadow: 0px 4px 11px rgb(0 0 0 / 30%);
-        font-size: 2em;
     }
     .info-content.p-5.m-5 p {
-        font-size: 2em;
+        font-size: 1em;
     }
-    .column {width:100%;}
+    
 }
