@@ -3,175 +3,194 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 /* Custom properties */
 /* 
  * Always set the map height explicitly to define the size of the div element
  * that contains the map. 
  */
- #map {
-    height: 100%;
-  }
-  
-  /* 
+#map {
+  height: 100%;
+}
+
+/* 
    * Optional: Makes the sample page fill the window. 
    */
-  html,
-  body {
-    height: 100%;
-    margin: 0 0 10vh 0;
-    padding: 0;
- 
-  }
+html,
+body {
+  height: 100%;
+  margin: 0 0 10vh 0;
+  padding: 0;
 
-  header {
-    padding: 10px;
-    background-color: rgb(6, 6, 56);
-    color: white
-  }
-
-  #nav {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  p {
-    font-size: 2vw;
-  }
-
-  table {
-    font-size: 12px;
-  }
-  #container {
-    position: relative;
-  }
-  #title {
-    margin: 10px auto;
-  }
-  .hotel-search {
-    position: relative;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background: rgb(255, 255, 255);
-    left: 0;
-    z-index: 1;
-    height: 100px;
-  }
-  
-  #map {
-    width: 90%;
-    height: 50vh;
-  }
-  
-  #listing {
-    position: relative;
-    width: 100%;
-    max-width: 919px;
-    align-items: flex-end!important;
-    cursor: pointer;
-    overflow-x: hidden;
-    display: flex;
 }
-  
-  #findhotels {
-    font-size: 14px;
-  }
-  
-  #locationField {
-    -webkit-box-flex: 1 1 190px;
-    -ms-flex: 1 1 190px;
-    flex: 1 1 190px;
-    margin: 0 8px;
-  }
-  
-  #controls {
-    -webkit-box-flex: 1 1 140px;
-    -ms-flex: 1 1 140px;
-    flex: 1 1 140px;
-  }
-  
-  .placeIcon {
-    width: 20px;
-    height: 34px;
-    margin: 4px;
-  }
-  
-  .hotelIcon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  #resultsTable {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  #rating {
-    font-size: 13px;
-    font-family: Arial Unicode MS;
-  }
-  
-  .iw_table_row {
-    height: 18px;
-  }
-  
-  .iw_attribute_name {
-    font-weight: bold;
-    text-align: right;
-  }
-  
-  .iw_table_icon {
-    text-align: right;
-  }
 
-  .logo {font-size:3vw;
-font-weight: 700;}
+header {
+  padding: 10px;
+  background-color: rgb(6, 6, 56);
+  color: white
+}
+
+#nav {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p {
+  font-size: 2vw;
+}
+
+table {
+  font-size: 12px;
+}
+
+#container {
+  position: relative;
+}
+
+#title {
+  margin: 10px auto;
+}
+
+.hotel-search {
+  position: relative;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  left: 0;
+  z-index: 1;
+  height: 100px;
+}
+
+#map {
+  width: 90%;
+  height: 50vh;
+}
+
+#listing {
+  position: relative;
+  width: 100%;
+  max-width: 919px;
+  align-items: flex-end !important;
+  cursor: pointer;
+  overflow-x: hidden;
+  display: flex;
+}
+
+#findhotels {
+  font-size: 14px;
+}
+
+#locationField {
+  -webkit-box-flex: 1 1 190px;
+  -ms-flex: 1 1 190px;
+  flex: 1 1 190px;
+  margin: 0 8px;
+}
+
+#controls {
+  -webkit-box-flex: 1 1 140px;
+  -ms-flex: 1 1 140px;
+  flex: 1 1 140px;
+}
+
+.placeIcon {
+  width: 20px;
+  height: 34px;
+  margin: 4px;
+}
+
+.hotelIcon {
+  width: 24px;
+  height: 24px;
+}
+
+#resultsTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#rating {
+  font-size: 13px;
+  font-family: Arial Unicode MS;
+}
+
+.iw_table_row {
+  height: 18px;
+}
+
+.iw_attribute_name {
+  font-weight: bold;
+  text-align: right;
+}
+
+.iw_table_icon {
+  text-align: right;
+}
+
+.logo {
+  font-size: 3vw;
+  font-weight: 700;
+}
 
 #sandbox-div button {
-    -webkit-appearance: button;
-    background-color: gold!important;
-    background-image: none!important;
-    border-radius: 10px!important;
-    padding: 10px 15px!important;
-    font-size: large!important;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    outline: none;
+  -webkit-appearance: button;
+  background-color: gold !important;
+  background-image: none !important;
+  border-radius: 10px !important;
+  padding: 10px 15px !important;
+  font-size: large !important;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  outline: none;
 }
 
-.ball {width:3vw;}
+.ball {
+  width: 3vw;
+}
 
 .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-  
-  .column {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
-  }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
 
-  #container{
-    background-color: red;
-  }
-  
-  .column1-schedule {
-    background-color: #ffffff;
-    padding: 2em;
-  }
-  
-  .column2-map {
-    background-color: green;
-  }
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+#container {
+  background-color: red;
+}
+
+.column1-schedule {
+  background-color: #ffffff;
+  padding: 2em;
+}
+
+.column2-map {
+  background-color: green;
+}
 
 img.w-12 {
-width: 10%;
-max-width: 70px;
-height: 10%;
+  width: 10%;
+  max-width: 70px;
+  height: 10%;
 }
-  
-  #sandbox-div h2 {font-weight: 700!important; font-size: larger!important;}
+
+.info-content.p-5.m-5 {
+  width: 80%;
+  margin: 80px auto 80px auto;
+  background-color: #eeeeee;
+  border-radius: 40px;
+  box-shadow: 0px 4px 11px rgb(0 0 0 / 30%);
+}
+
+#sandbox-div h2 {
+  font-weight: 700 !important;
+  font-size: larger !important;
+}
