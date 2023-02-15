@@ -173,5 +173,12 @@ width: 10%;
 max-width: 70px;
 height: 10%;
 }
+.info-content.p-5.m-5 {
+    width: 80%;
+    margin: 80px auto 80px auto;
+    background-color: #eeeeee;
+    border-radius: 40px;
+    box-shadow: 0px 4px 11px rgb(0 0 0 / 30%);
+}
   
   #sandbox-div h2 {font-weight: 700!important; font-size: larger!important;}
