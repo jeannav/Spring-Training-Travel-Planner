@@ -204,8 +204,8 @@ height: 10%;
 @media only screen and (max-width: 600px){
 	/*Big smartphones [426px -> 600px]*/
     .info-content.p-5.m-5 {
-        width: 100%;
-        margin: 20px;
+        width: 90%;
+        margin: 20px auto;
         padding: 2em;
         background-color: #eeeeee;
         border-radius: 20px;
@@ -221,8 +221,8 @@ height: 10%;
 @media only screen and (max-width: 425px){
 	/*Small smartphones [325px -> 425px]*/
     .info-content.p-5.m-5 {
-        width: 100%;
-        margin: 20px;
+        width: 90%;
+        margin: 20px auto;
         padding: 2em;
         background-color: #eeeeee;
         border-radius: 20px;
