@@ -1,7 +1,7 @@
 
 # Project Title: Spring Training Travel Planner📫 🚀 💡
 
-As a baseball fan, I want to purchase game tickets and book a hotel near the stadium so that I can watch my favorite team play.
+As a baseball fan, I want to search the MLB Spring Training schedule and book a hotel near the stadium so that I can watch my favorite team play.
 
 Spring Training Travel Planner we are building a website that allows users to search MLB game schedules for Spring Training and then buy tickets for select games and book a hotel near the location of the chosen games.
 
@@ -23,10 +23,10 @@ User can also navigate the map using the mouse and hit the "Search Nerby" to loo
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| background | !rgb(255, 255, 255) |
-| text | !color: white |
+| background | #ffffff |
+| text | color: #ffffff |
 | background-color: |  gold!important |
-| background-color | !header  rgb(6, 6, 56 |
+| background-color | rgba(6, 6, 56, 1) |
 
 
 🚀 ## Deployment
@@ -42,8 +42,8 @@ To deploy this project run
 📫 ## Authors
 
 - [Amanda Hardin](https://www.github.com/AHardin77)
-- [Jeanna Vasquez-Garza](https://www.github.com/octokatherine)
-- [Aaron DeVandry](https://www.github.com/octokatherine)
+- [Jeanna Vasquez-Garza](https://www.github.com/jeannav)
+- [Aaron DeVandry](https://www.github.com/adevandry)
 
 
 📫 ## Acknowledgements
@@ -59,8 +59,8 @@ To deploy this project run
 - CSS
 - Javascript
 - Jquery
-- Tailwind CSS- 
-- API Mlb- https://sportsdata.io/ 
+- Tailwind CSS 
+- API MLB- https://sportsdata.io/ 
 - API Google Maps
 
 
